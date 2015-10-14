@@ -43,7 +43,6 @@ public class Graph {
         Vertex v2 = verticies.get(4);
         boolean conn = graph.isConnected(v1, v2);
         System.out.println("connected: " + conn );
-        System.out.println("colorable: " + graph.isTwoColorable() );
 	}
 
 	public boolean isConnected(Vertex v1, Vertex v2) {
@@ -53,7 +52,12 @@ public class Graph {
 			graph.put(vertex, false);
 		}
 		graph = explore(v1, graph);
-		return graph.get(v2);
+		for(Vertex v : graph.keySet()) {
+			if(!graph.get(v)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public static HashMap<Vertex, Boolean> explore (Vertex v, HashMap<Vertex, Boolean> graph) {
@@ -63,43 +67,6 @@ public class Graph {
 			if(!graph.get(vertex)) {
 				explore(vertex, graph);
 			}
-		}
-		return graph;
-	}
-
-	public boolean isTwoColorable() {
-		HashMap<Vertex, Boolean> graph = new HashMap<Vertex, Boolean>();
-		for(Integer key : verticies.keySet()) {
-			Vertex vertex = verticies.get(key);
-			graph.put(vertex, false);
-		}
-
-		for(Integer key : verticies.keySet()) {
-			Vertex vertex = verticies.get(key);
-			graph = exploreColorable(vertex, graph);
-		}
-		
-		boolean colorable = true;
-		for(Integer key : verticies.keySet()) {
-			Vertex vertex = verticies.get(key);
-			for(Vertex neigh : vertex.getNeighbors()) {
-				colorable = graph.get(vertex) != graph.get(neigh);
-				System.out.println(vertex.value + " " + neigh.value + graph.get(vertex) + "\n" + graph.get(neigh));
-				if(!colorable) {
-					return false;
-				}
-			}
-		}
-
-		return colorable;
-	}
-
-	public static HashMap<Vertex, Boolean> exploreColorable (Vertex v, HashMap<Vertex, Boolean> graph) {
-		for(Vertex vertex : v.getNeighbors()) {
-			graph.remove(vertex);
-			graph.put(vertex, !graph.get(v));
-			//System.out.println(v.value + " " + vertex.value + graph.get(v) + graph.get(vertex) + "\n");
-			explore(vertex, graph);
 		}
 		return graph;
 	}
