@@ -1,0 +1,39 @@
+if it's connected... I know what to do
+
+if it's not connected... split into parts and then do it?
+
+
+for vertex in verticies:
+	createTree(vertex)
+
+
+createTree(vertex){
+	if(vertex ISN'T in tree){
+		add vertex to tree;
+	}
+ 		for neighbors of vertex 
+ 			if(neighbor is already in tree){
+ 			 	add neigh as SHARED_edge_NOT_CHILD (dotted line) of vertex
+ 			}
+ 			else {
+ 			 	add neigh as children of vertex
+ 			 	createTree(neigh)
+ 			}
+ }
+
+
+
+tree class
+list of Nodes (or verticies)
+
+Node (or vertex)
+-children
+-dottedLine
+
+
+
+isColorable() {
+	for(all nodes in the tree) {
+		make sure that it's color differs from the color of it's child nodes and dotted line nodes
+	}
+}
