@@ -41,10 +41,7 @@ public class Main {
 
 
         Tree tree = new Tree(verticies);
-        //System.out.println(tree.isColorable());
-
-        for(Vertex v : tree.getNodes()) {
-            System.out.println(v.value);
-        }
+        System.out.println();
+        System.out.println(tree.isColorable());
 	}
 }
